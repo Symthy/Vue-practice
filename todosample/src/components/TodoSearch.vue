@@ -1,6 +1,6 @@
 <template>
   <div class="todo_search un_blue">
-    <div class="todo_search_box un_pad_all5">
+    <div class="todo_search_box">
       <label class="todo_search_label un_pad_rl10">キーワード検索</label>
       <input class="todo_search_input un_pad_rl10" type="text" v-model="searchWord" />
     </div>
@@ -24,6 +24,7 @@ export default {
 .todo_search_box {
   display: flex;
   justify-content: center;
+  @extend .hp_pad_all5;
 }
 .todo_search_label,
 .todo_search_input {

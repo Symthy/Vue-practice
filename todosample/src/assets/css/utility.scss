@@ -1,7 +1,187 @@
-.un_pad_rl10 {
-  padding: 0 10px;
+// padding 5px
+.hp_pad_t5 {
+  padding-top: 5px;
+}
+.hp_pad_b5 {
+  padding-bottom: 5px;
+}
+.hp_pad_r5 {
+  padding-right: 5px;
+}
+.hp_pad_l5 {
+  padding-left: 5px;
+}
+.hp_pad_tb5 {
+  @extend .hp_pad_t5, .hp_pad_b5;
+}
+.hp_pad_rl5 {
+  @extend .hp_pad_r5, .hp_pad_l5;
+}
+.hp_pad_all5 {
+  padding: 5px;
 }
 
-.un_pad_all5 {
-  padding: 5px;
+// padding 10px
+.hp_pad_t10 {
+  padding-top: 10px;
+}
+.hp_pad_b10 {
+  padding-bottom: 10px;
+}
+.hp_pad_r10 {
+  padding-right: 10px;
+}
+.hp_pad_l10 {
+  padding-left: 10px;
+}
+.hp_pad_tb10 {
+  @extend .hp_pad_t10, .hp_pad_b10;
+}
+.hp_pad_rl10 {
+  @extend .hp_pad_r10, .hp_pad_l10;
+}
+.hp_pad_all10 {
+  padding: 10px;
+}
+
+// padding 15px
+.hp_pad_t15 {
+  padding-top: 15px;
+}
+.hp_pad_b15 {
+  padding-bottom: 15px;
+}
+.hp_pad_r15 {
+  padding-right: 15px;
+}
+.hp_pad_l15 {
+  padding-left: 15px;
+}
+.hp_pad_tb15 {
+  @extend .hp_pad_t15, .hp_pad_b15;
+}
+.hp_pad_rl15 {
+  @extend .hp_pad_r15, .hp_pad_l15;
+}
+.hp_pad_all15 {
+  padding: 15px;
+}
+
+// padding 20px
+.hp_pad_t20 {
+  padding-top: 20px;
+}
+.hp_pad_b20 {
+  padding-bottom: 20px;
+}
+.hp_pad_r20 {
+  padding-right: 20px;
+}
+.hp_pad_l20 {
+  padding-left: 20px;
+}
+.hp_pad_tb20 {
+  @extend .hp_pad_t20, .hp_pad_b20;
+}
+.hp_pad_rl20 {
+  @extend .hp_pad_r20, .hp_pad_l20;
+}
+.hp_pad_all20 {
+  padding: 20px;
+}
+
+// margin 5px
+.hp_mar_t5 {
+  margin-top: 5px;
+}
+.hp_mar_b5 {
+  margin-bottom: 5px;
+}
+.hp_mar_r5 {
+  margin-right: 5px;
+}
+.hp_mar_l5 {
+  margin-left: 5px;
+}
+.hp_mar_tb5 {
+  @extend .hp_mar_t5, .hp_mar_b5;
+}
+.hp_mar_rl5 {
+  @extend .hp_mar_r5, .hp_mar_l5;
+}
+.hp_mar_all5 {
+  margin: 5px;
+}
+
+// margin 10px
+.hp_mar_t10 {
+  margin-top: 10px;
+}
+.hp_mar_b10 {
+  margin-bottom: 10px;
+}
+.hp_mar_r10 {
+  margin-right: 10px;
+}
+.hp_mar_l10 {
+  margin-left: 10px;
+}
+.hp_mar_tb10 {
+  @extend .hp_mar_t10, .hp_mar_b10;
+}
+.hp_mar_rl10 {
+  @extend .hp_mar_r10, .hp_mar_l10;
+}
+.hp_mar_all10 {
+  margin: 10px;
+}
+
+// margin 15px
+.hp_mar_t15 {
+  margin-top: 15px;
+}
+.hp_mar_b15 {
+  margin-bottom: 15px;
+}
+.hp_mar_r15 {
+  margin-right: 15px;
+}
+.hp_mar_l15 {
+  margin-left: 15px;
+}
+.hp_mar_tb15 {
+  @extend .hp_mar_t15, .hp_mar_b15;
+}
+.hp_mar_rl15 {
+  @extend .hp_mar_r15, .hp_mar_l15;
+}
+.hp_mar_all15 {
+  margin: 15px;
+}
+
+// margin 20px
+.hp_mar_t20 {
+  margin-top: 20px;
+}
+.hp_mar_b20 {
+  margin-bottom: 20px;
+}
+.hp_mar_r20 {
+  margin-right: 20px;
+}
+.hp_mar_l20 {
+  margin-left: 20px;
+}
+.hp_mar_tb20 {
+  @extend .hp_mar_t20, .hp_mar_b20;
+}
+.hp_mar_rl20 {
+  @extend .hp_mar_r20, .hp_mar_l20;
+}
+.hp_mar_all20 {
+  margin: 20px;
+}
+
+.hp_mar_l40 {
+  margin-left: 40px;
 }
