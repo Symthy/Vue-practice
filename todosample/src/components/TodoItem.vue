@@ -6,11 +6,11 @@
     <div class="todo_item">
       <div class="todo_title">
         <label class="todo_title_label">タイトル</label>
-        <input class="todo_title_input" v-model="todoTitle" type="text" />
+        <input class="todo_title_input" v-model.trim.lazy="todoTitle" type="text" />
       </div>
       <div class="todo_detail">
         <label class="todo_detail_label">詳細</label>
-        <textarea class="todo_detail_input" v-model="todoDetail" type="text"></textarea>
+        <textarea class="todo_detail_input" v-model.trim.lazy="todoDetail" type="text"></textarea>
       </div>
     </div>
   </div>
