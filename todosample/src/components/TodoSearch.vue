@@ -55,8 +55,8 @@ export default {
   max-width: 1080px;
 
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: flex-start; // 左寄せ
+  align-items: center; // 縦中央
   @extend .hp_mar_l40;
 }
 
