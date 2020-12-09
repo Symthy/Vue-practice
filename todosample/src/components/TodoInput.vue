@@ -16,12 +16,12 @@
         <p class="todo_item_label">カテゴリ</p>
         <form class="todo_category_input" @submit.prevent="createCategory">
           <input class="hp_mar_r20" v-model.trim="categoryName" type="text" />
-          <button type="submit">カテゴリ追加</button>
+          <button type="submit" :disabled="!isCanCreateCategory">カテゴリ追加</button>
         </form>
       </div>
       <div class="ly_todo_element todo_action">
         <form class="hp_mar_tb10 hp_mar_r20" @submit.prevent="createTodo">
-          <button>Todo作成</button>
+          <button type="submit" :disabled="!isCanCreateTodo">Todo作成</button>
         </form>
       </div>
     </div>
@@ -36,6 +36,7 @@ export default {
       todoDetail: "",
       categoryName: "",
       todoList: [],
+      categoryList: [],
     };
   },
   computed: {
@@ -47,6 +48,23 @@ export default {
     },
     isExsitsCategory() {
       return this.categories.indexof(this.categoryName) !== -1;
+    },
+    hasTodo() {
+      return this.todoList.length > 0;
+    },
+  },
+  watch: {
+    todoList: {
+      handler(next, prev) {
+        window.localStorage.setItem("todoList", JSON.stringify(next));
+      },
+      deep: true,
+    },
+    categoryList: {
+      handler(next, prev) {
+        window.localStorage.setItem("categoryList", JSON.stringify(next));
+      },
+      deep: true,
     },
   },
   methods: {
@@ -73,6 +91,16 @@ export default {
       this.categories.push(this.categoryName);
       this.categoryName = "";
     },
+  },
+  created() {
+    const todoListJson = window.localStorage.getItem("todoList");
+    const categoryListJson = window.localStorage.getItem("categoryList");
+    if (todoList) {
+      this.todoList = JSON.parse(todoListJson);
+    }
+    if (categoryList) {
+      this.categoryList = JSON.parse(categoryListJson);
+    }
   },
 };
 </script>

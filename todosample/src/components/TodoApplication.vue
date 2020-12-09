@@ -1,7 +1,7 @@
 <template>
   <div class="app_base">
     <h1 class="app_title">Todo アプリ (Vue practice)</h1>
-    <TodoItem></TodoItem>
+    <TodoInput></TodoInput>
     <TodoSearch></TodoSearch>
     <br />
     <input type="text" v-model="message" />
@@ -12,13 +12,13 @@
 
 <script>
 import TodoSearch from "./TodoSearch.vue";
-import TodoItem from "./TodoItem.vue";
+import TodoItem from "./TodoInput.vue";
 
 export default {
   name: "TodoApplication",
   components: {
     TodoSearch,
-    TodoItem,
+    TodoInput,
   },
   data() {
     return {
