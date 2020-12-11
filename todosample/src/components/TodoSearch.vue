@@ -9,7 +9,7 @@
         <p class="todo_search_separator">|</p>
       </div>
       <div class="todo_search_item">
-        <lable>並び順</lable>
+        <label>並び順</label>
         <select class="todo_search_input" v-model="order">
           <option value="asc">昇順</option>
           <option value="disc">降順</option>

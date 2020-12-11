@@ -6,11 +6,18 @@
     <div class="todo_item">
       <div class="ly_todo_element todo_title hp_mar_t20 hp_mar_b5">
         <label class="todo_item_label">タイトル</label>
-        <input class="todo_title_input hp_mar_r20" v-model.trim.lazy="todoTitle" type="text" />
+        <input
+          class="todo_title_input hp_mar_r20"
+          v-model.trim.lazy="todoTitle"
+          type="text"
+        />
       </div>
       <div class="ly_todo_element todo_detail hp_mar_t5 hp_mar_b20">
         <label class="todo_item_label">詳細</label>
-        <textarea class="todo_detail_input hp_mar_r20" v-model.trim.lazy="todoDetail" type="text"></textarea>
+        <textarea
+          class="todo_detail_input hp_mar_r20"
+          v-model.trim.lazy="todoDetail"
+        ></textarea>
       </div>
       <div class="ly_todo_element todo_category">
         <p class="todo_item_label">カテゴリ</p>
@@ -30,12 +37,19 @@
 
 <script>
 export default {
+  props: {
+    propTodoList: {
+      type: Array,
+      default: () => [],
+      required: true,
+    },
+  },
   data() {
     return {
       todoTitle: "",
       todoDetail: "",
       categoryName: "",
-      todoList: [],
+      todoList: this.propTodoList,
       categoryList: [],
     };
   },
@@ -44,10 +58,10 @@ export default {
       return this.todoTitle !== "";
     },
     isCanCreateCategory() {
-      return this.categoryName !== "" && this.isExsitsCategory();
+      return this.categoryName !== "" && this.isExsitsCategory;
     },
     isExsitsCategory() {
-      return this.categories.indexof(this.categoryName) !== -1;
+      return this.categoryList.indexOf(this.categoryName) !== -1;
     },
     hasTodo() {
       return this.todoList.length > 0;
@@ -55,13 +69,13 @@ export default {
   },
   watch: {
     todoList: {
-      handler(next, prev) {
+      handler(next) {
         window.localStorage.setItem("todoList", JSON.stringify(next));
       },
       deep: true,
     },
     categoryList: {
-      handler(next, prev) {
+      handler(next) {
         window.localStorage.setItem("categoryList", JSON.stringify(next));
       },
       deep: true,
@@ -76,13 +90,14 @@ export default {
         id: "task-" + Date.now(),
         title: this.todoTitle,
         detail: this.todoDetail,
-        categories: this.categories,
+        categoryList: this.categoryList,
         dateTime: Date.now(),
         isDone: false,
       });
       this.todoTitle = "";
       this.todoDetail = "";
-      this.categories = [];
+      this.categoryList = [];
+      this.$emit("create-todo", this.todoList);
     },
     createCategory() {
       if (!this.isCanCreateCategory) {
@@ -93,12 +108,12 @@ export default {
     },
   },
   created() {
-    const todoListJson = window.localStorage.getItem("todoList");
-    const categoryListJson = window.localStorage.getItem("categoryList");
-    if (todoList) {
+    const todoListJson = window.localStorage.getItem("todoList") ?? [];
+    const categoryListJson = window.localStorage.getItem("categoryList") ?? [];
+    if (this.todoList && this.todoList.length > 0) {
       this.todoList = JSON.parse(todoListJson);
     }
-    if (categoryList) {
+    if (this.categoryList && this.categoryList.length > 0) {
       this.categoryList = JSON.parse(categoryListJson);
     }
   },

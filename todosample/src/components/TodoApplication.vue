@@ -1,8 +1,10 @@
 <template>
   <div class="app_base">
     <h1 class="app_title">Todo アプリ (Vue practice)</h1>
-    <TodoInput></TodoInput>
+    <TodoInput :todoList="todos" @create-todo="receiveTodo"></TodoInput>
     <TodoSearch></TodoSearch>
+    <TodoList :todoList="todos"></TodoList>
+    <p>親コンポ：{{ todos }}</p>
     <br />
     <input type="text" v-model="message" />
     <textarea v-model="message"></textarea>
@@ -12,19 +14,26 @@
 
 <script>
 import TodoSearch from "./TodoSearch.vue";
-import TodoItem from "./TodoInput.vue";
+import TodoInput from "./TodoInput.vue";
+import TodoList from "./TodoList.vue";
 
 export default {
   name: "TodoApplication",
   components: {
     TodoSearch,
     TodoInput,
+    TodoList,
   },
   data() {
     return {
       message: "Todo Application Sample",
-      categories: [],
+      todos: [],
     };
+  },
+  methods: {
+    receiveTodo(todos) {
+      this.todos = todos;
+    },
   },
 };
 </script>
