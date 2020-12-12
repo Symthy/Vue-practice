@@ -58,10 +58,10 @@ export default {
       return this.todoTitle !== "";
     },
     isCanCreateCategory() {
-      return this.categoryName !== "" && this.isExsitsCategory;
+      return this.categoryName !== "" && this.isNotExsitsCategory;
     },
-    isExsitsCategory() {
-      return this.categoryList.indexOf(this.categoryName) !== -1;
+    isNotExsitsCategory() {
+      return this.categoryList.indexOf(this.categoryName) < 0;
     },
     hasTodo() {
       return this.todoList.length > 0;
@@ -103,7 +103,7 @@ export default {
       if (!this.isCanCreateCategory) {
         return;
       }
-      this.categories.push(this.categoryName);
+      this.categoryList.push(this.categoryName);
       this.categoryName = "";
     },
   },

@@ -3,14 +3,19 @@
     <div class="todo_search_base">
       <div class="todo_search_item">
         <label class="todo_search_label">完了タスク非表示</label>
-        <input class="todo_search_input" type="checkbox" v-model="isHideDone" />
+        <input
+          class="todo_search_input"
+          type="checkbox"
+          v-model="searchOption.isHideDone"
+          @change="onChange"
+        />
       </div>
       <div class="todo_search_item">
         <p class="todo_search_separator">|</p>
       </div>
       <div class="todo_search_item">
         <label>並び順</label>
-        <select class="todo_search_input" v-model="order">
+        <select class="todo_search_input" v-model="searchOption.order" @change="onChange">
           <option value="asc">昇順</option>
           <option value="disc">降順</option>
         </select>
@@ -20,7 +25,12 @@
       </div>
       <div class="todo_search_item">
         <label class="todo_search_label">キーワード検索</label>
-        <input class="todo_search_input" type="text" v-model.trim="searchWord" />
+        <input
+          class="todo_search_input"
+          type="text"
+          v-model.trim="searchOption.searchWord"
+          @change="onChange"
+        />
       </div>
     </div>
   </div>
@@ -29,12 +39,28 @@
 <script>
 export default {
   name: "TodoSearch",
+  props: {
+    propSearchOption: {
+      type: Object,
+      default: () => {
+        return {
+          searchWord: "",
+          isHideDone: false,
+          order: "asc",
+        };
+      },
+      required: false,
+    },
+  },
   data() {
     return {
-      searchWord: "",
-      isHideDone: false,
-      order: "asc",
+      searchOption: this.propSearchOption,
     };
+  },
+  methods: {
+    onChange() {
+      this.$emit("input-search", this.searchOption);
+    },
   },
 };
 </script>
