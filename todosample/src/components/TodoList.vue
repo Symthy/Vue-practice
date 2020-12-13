@@ -14,7 +14,7 @@
       <tbody v-if="hasTodo()">
         <tr class="todo_item" v-for="(todo, index) in todoList" :key="todo.id">
           <td>
-            {{ index }}
+            {{ index + 1 }}
           </td>
           <td class="todo_item_done" v-if="todo">
             <input v-model="todo.isDone" type="checkbox" />
@@ -40,7 +40,48 @@
         </tr>
       </tbody>
     </table>
-    <div>{{ searchCondition }}</div>
+    <br />
+    <p>検索オプション適用後リスト</p>
+    <table class="todo_list">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Done</th>
+          <th>DateTime</th>
+          <th>Title</th>
+          <th>Detail</th>
+          <th>Categories</th>
+        </tr>
+      </thead>
+      <tbody v-if="hasTodo()">
+        <tr class="todo_item" v-for="(todo, index) in filterTodoList()" :key="todo.id">
+          <td>
+            {{ index + 1 }}
+          </td>
+          <td class="todo_item_done" v-if="todo">
+            <input v-model="todo.isDone" type="checkbox" readonly />
+          </td>
+          <td class="todo_item_date">
+            {{ new Date(todo.dateTime).toLocaleString("ja") }}
+          </td>
+          <td class="todo_item_title">{{ todo.title }}</td>
+          <td class="todo_item_detail" v-if="todo.detail">
+            {{ todo.detail }}
+          </td>
+          <td>
+            <ul class="todo_item_categories" v-if="hasCategory(todo)">
+              <li
+                class="todo_item_category"
+                v-for="category in todo.categoryList"
+                :key="category"
+              >
+                {{ category }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -55,7 +96,13 @@ export default {
     },
     searchCondition: {
       type: Object,
-      default: () => {},
+      default: () => {
+        return {
+          searchWord: "",
+          isHideDone: false,
+          order: "asc",
+        };
+      },
     },
   },
   computed: {
@@ -76,7 +123,36 @@ export default {
       };
     },
     filterTodoList() {
-      return () => {};
+      return () => {
+        const searchWord = this.searchCondition.searchWord;
+        const isHideDoneTodo = this.searchCondition.isHideDone;
+        const orderTodo = this.searchCondition.order;
+        return this.todoList
+          .filter((todo) => {
+            if (isHideDoneTodo) {
+              return todo.isDone;
+            }
+            return true;
+          })
+          .filter((todo) => {
+            if (searchWord == null || searchWord === "") {
+              return true;
+            }
+            if (
+              todo.title.indexOf(searchWord) === -1 &&
+              todo.detail.indexOf(searchWord) === -1
+            ) {
+              return false;
+            }
+            return true;
+          })
+          .sort((before, after) => {
+            if (orderTodo === "asc") {
+              return before.dateTime - after.dateTime;
+            }
+            return after.dateTime - before.dateTime;
+          });
+      };
     },
   },
 };
@@ -90,11 +166,11 @@ export default {
 }
 
 .todo_item_categories {
+  margin: auto 5px auto -15px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
 }
 
 td {

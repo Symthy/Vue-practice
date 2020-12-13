@@ -3,7 +3,7 @@
     <div class="todo_tab">
       <p class="todo_tab_label">Todo</p>
     </div>
-    <div class="todo_item">
+    <div class="todo_item hp_pad_r20">
       <div class="ly_todo_element todo_title hp_mar_t20 hp_mar_b5">
         <label class="todo_item_label">タイトル</label>
         <input
@@ -26,6 +26,24 @@
           <button type="submit" :disabled="!isCanCreateCategory">カテゴリ追加</button>
         </form>
       </div>
+
+      <ul class="todo_category_list">
+        <li
+          v-for="category in categoryList"
+          :key="category"
+          class="todo_category_item hp_pad_r5"
+        >
+          <label :for="'category-' + category">
+            <input
+              v-model="todoCategories"
+              type="checkbox"
+              :id="'category-' + category"
+              :value="category"
+            />
+            {{ category }}
+          </label>
+        </li>
+      </ul>
       <div class="ly_todo_element todo_action">
         <form class="hp_mar_tb10 hp_mar_r20" @submit.prevent="createTodo">
           <button type="submit" :disabled="!isCanCreateTodo">Todo作成</button>
@@ -50,6 +68,7 @@ export default {
       todoDetail: "",
       categoryName: "",
       todoList: this.propTodoList,
+      todoCategories: [],
       categoryList: [],
     };
   },
@@ -90,13 +109,13 @@ export default {
         id: "task-" + Date.now(),
         title: this.todoTitle,
         detail: this.todoDetail,
-        categoryList: this.categoryList,
+        categoryList: this.todoCategories,
         dateTime: Date.now(),
         isDone: false,
       });
       this.todoTitle = "";
       this.todoDetail = "";
-      this.categoryList = [];
+      this.todoCategories = [];
       this.$emit("create-todo", this.todoList);
     },
     createCategory() {
@@ -175,7 +194,7 @@ export default {
 
 .todo_item_label {
   flex-basis: 120px;
-  @extend .hp_mar_l40;
+  @extend .hp_pad_l20;
   text-align: left;
 }
 .todo_title_input {
@@ -189,9 +208,31 @@ export default {
 
 .todo_category {
   text-align: left;
+
+  .todo_category_input {
+    flex-basis: 100%;
+  }
 }
-.todo_category_input {
-  flex-basis: 100%;
+
+.todo_category_list {
+  margin: 0;
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: flex-start;
+  // align-items: start;
+
+  .todo_category_item {
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 3px;
+    @extend .hp_mar_l20;
+  }
+
+  ul,
+  li {
+    list-style-type: none;
+  }
 }
 
 .todo_action {
