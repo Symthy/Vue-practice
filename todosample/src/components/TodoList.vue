@@ -82,11 +82,24 @@
         </tr>
       </tbody>
     </table>
+    <br />
+    <p>子コンポ化リスト</p>
+    <TodoItem
+      v-for="todo in todoList"
+      :key="todo.id"
+      :todo="todo"
+      v-model:isDone="todo.isDone"
+    ></TodoItem>
   </div>
 </template>
 
 <script>
+import TodoItem from "./TodoItem.vue";
+
 export default {
+  components: {
+    TodoItem,
+  },
   props: {
     todoList: {
       type: Array,
