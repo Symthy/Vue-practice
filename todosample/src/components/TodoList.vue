@@ -84,12 +84,14 @@
     </table>
     <br />
     <p>子コンポ化リスト</p>
-    <TodoItem
-      v-for="todo in todoList"
-      :key="todo.id"
-      :todo="todo"
-      v-model:isDone="todo.isDone"
-    ></TodoItem>
+    <transition-group name="todo-list" tag="ul" v-if="hasTodo" class="todo-list">
+      <TodoItem
+        v-for="todo in todoList"
+        :key="todo.id"
+        :todo="todo"
+        v-model:isDone="todo.isDone"
+      ></TodoItem>
+    </transition-group>
   </div>
 </template>
 
@@ -193,5 +195,21 @@ td {
 thead {
   background-color: #333;
   color: #fff;
+}
+
+.todo-list-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.todo-list-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.todo-list-enter-to,
+.todo-list-leave-from {
+  opacity: 1;
+  transform: translateX(0);
 }
 </style>

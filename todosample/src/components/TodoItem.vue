@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="todo-item">
     <div class="todo_item_done">
       <input :checked="isDone" @change="onChangeTodo" type="checkbox" />
     </div>
@@ -51,4 +51,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.todo-item {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+</style>
