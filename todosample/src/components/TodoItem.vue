@@ -1,11 +1,11 @@
 <template>
-  <li class="todo-item">
+  <li class="todo_item">
     <div class="todo_item_done">
       <input :checked="isDone" @change="onChangeTodo" type="checkbox" />
     </div>
     <div class="todo_item_content">
       <div class="todo_item_date">
-        {{ new Date(todo.dateTime).toString() }}
+        {{ new Date(todo.dateTime).toLocaleString("ja") }}
       </div>
       <h3 class="todo_item_title">
         {{ todo.title }}
@@ -51,8 +51,24 @@ export default {
 };
 </script>
 
-<style>
-.todo-item {
+<style lang="scss" scoped>
+@import "../assets/css/utility.scss";
+/* .todo-item {
   transition: opacity 300ms ease, transform 300ms ease;
+} */
+.todo_item,
+.todo_item_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo_item_content > * {
+  @extend .hp_mar_r10;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.todo_item > * {
+  @extend .hp_mar_r10;
 }
 </style>

@@ -201,15 +201,17 @@ thead {
   opacity: 0;
   transform: translateX(-20px);
 }
-
 .todo-list-leave-to {
   opacity: 0;
   transform: translateX(20px);
 }
-
 .todo-list-enter-to,
 .todo-list-leave-from {
   opacity: 1;
   transform: translateX(0);
+}
+.todo-list-enter-active,
+.todo-list-leave-active {
+  transition: opacity 300ms ease, transform 300ms ease;
 }
 </style>
