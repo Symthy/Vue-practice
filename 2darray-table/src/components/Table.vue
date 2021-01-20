@@ -1,46 +1,64 @@
 <template>
   <div>
     <table>
-      <tr v-for="(rowDataArray, rowNum) in existingDataArray" :key="rowNum">
-        <td v-for="(data, colNum) in rowDataArray" :key="data">
-          <input v-model="rowDataArray[rowNum][colNum]" type="text" />
+      <tr>
+        <th>item1</th>
+        <th>item2</th>
+        <th>item3</th>
+        <th>item4</th>
+        <th>item5</th>
+        <th>option</th>
+      </tr>
+      <tr v-for="(rowDataArray, rowNum) in dataArray" :key="`ext-row-${rowNum}`">
+        <td v-for="(data, colNum) in rowDataArray" :key="`ext-col-${colNum}`">
+          <input v-model="dataArray[rowNum][colNum]" type="text" />
         </td>
         <td>
           <input type="checkbox" />
         </td>
       </tr>
-      <tr v-for="(rowDataArray, rowNum) in newDataArray" :key="rowNum">
-        <td v-for="(data, colNum) in rowDataArray" :key="data">
+      <tr v-for="(rowNewDataArray, rowNum) in newDataArray" :key="`new-${rowNum}`">
+        <td v-for="(data, colNum) in rowNewDataArray" :key="`new-col-${colNum}`">
           <input v-model="newDataArray[rowNum][colNum]" type="text" />
         </td>
         <td>
-          <button @click="removeNewData(colNum)">削除</button>
+          <button @click="removeNewData(rowNum)">削除</button>
         </td>
       </tr>
     </table>
 
-    <button @click="addNewData">追加(仮)</button>
-
-    <button @click="registerData">登録(仮)</button>
+    <button @click="addNewData">追加</button>
+    <form method="POST" @submit="registerData">
+      <button>登録</button>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    existingDataArray: [];
-    newDataArray: [];
+    return {
+      dataArray: [],
+      newDataArray: [],
+    };
   },
   methods: {
     addNewData() {
-      const datas = [];
-      newDataArray.push(datas);
+      const datas = Array(5).fill("");
+      this.newDataArray.push(datas);
     },
     removeNewData(rowNum) {
-      newDataArray.splice(rowNum);
+      this.newDataArray.splice(rowNum, 1);
     },
     registerData() {
-      const allDataArray = existingDataArray.concat(newDataArray);
+      const is_ok = confirm("Register?");
+      if (!is_ok) {
+        event.preventDefault();
+        return;
+      }
+      this.dataArray = this.dataArray.concat(this.newDataArray);
+      this.newDataArray = [];
+      event.preventDefault(); // 本来はデータ送信
     },
   },
 };
